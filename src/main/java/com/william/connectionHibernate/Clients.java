@@ -1,9 +1,6 @@
 package com.william.connectionHibernate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity //Corresponde con una tabla en nuestra bd
 @Table(name = "clients") //Nombre de la tabla en la bd
@@ -62,10 +59,16 @@ public class Clients {
                 '}';
     }
 
+
     @Id //Clave primaria
+    /*
+        Definimos la llave primaria, el tipo(strategy) es para que el ORM
+        pueda identificar la llave almacenada en la db.
+        (ejm: AUTO, identity, sequenence como en ORACLE o UUID))
+     */
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
     @Column(name = "idCliente") //Especificar cada columna en la tabla
     private int idCliente;
-
     @Column(name = "nombre")
     private String nombre;
 
