@@ -47,10 +47,13 @@ public class StoreClient {
 
             System.out.println("Cliente registrado: " + insertedClient.toString());
 
+            session.getTransaction().commit();
+
             session.close();
 
         } finally {
             factory.close();
+
         }
 
     }
