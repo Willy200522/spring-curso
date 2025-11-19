@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 public class StoreOrder {
@@ -34,9 +35,9 @@ public class StoreOrder {
 
             OrderClient order = null;
 
-            for(int i = 0; i < orderSize-1; i++){
+            for(int i = 0; i < orderSize; i++){
 
-                order = new OrderClient(new Date());
+                order = new OrderClient(new Date(new GregorianCalendar().getTime().getTime()+172800000L*(i+1)));
 
                 client.addOrders(order);
 
@@ -47,6 +48,7 @@ public class StoreOrder {
             session.getTransaction().commit();
 
             System.out.println("Order saved successfully for client: " + client.getNombre());
+
 
         } finally {
 

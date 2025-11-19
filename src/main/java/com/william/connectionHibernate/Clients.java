@@ -62,6 +62,14 @@ public class Clients {
         orderRequired.setClient(this);
     }
 
+    public List<OrderClient> getOrder() {
+        return order;
+    }
+
+    public void setOrder(List<OrderClient> order) {
+        this.order = order;
+    }
+
     @Override
     public String toString() {
         return "Clients{" +

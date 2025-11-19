@@ -35,7 +35,7 @@ public class OrderClient {
         return "OrderClient{" +
                 "idOrder=" + idOrder +
                 ", client=" + client +
-                ", orderDate=" + orderDate.getTime() +
+                ", orderDate=" + orderDate +
                 '}';
     }
 
