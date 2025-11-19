@@ -2,6 +2,9 @@ package com.william.connectionHibernate;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity //Corresponde con una tabla en nuestra bd
 @Table(name = "clients") //Nombre de la tabla en la bd
 public class Clients {
@@ -49,6 +52,16 @@ public class Clients {
         this.telefono = telefono;
     }
 
+
+    public void addOrders(OrderClient orderRequired){
+
+        if(order==null) order = new ArrayList<>();
+
+        order.add(orderRequired);
+
+        orderRequired.setClient(this);
+    }
+
     @Override
     public String toString() {
         return "Clients{" +
@@ -77,4 +90,8 @@ public class Clients {
 
     @Column(name = "telefono")
     private String telefono;
+
+    // -> Se mapea el atributo cliente en OrderClient para indicar relación entre ambas tablas
+    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<OrderClient> order;
 }
