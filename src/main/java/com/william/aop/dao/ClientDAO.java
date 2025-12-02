@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientDAO {
 
-    public void insertClient(){
+    public void insertClient(ClientDAO client){
+
         System.out.println("Insertando cliente en la base de datos");
+
     }
 
     public String getClientValoration() {
@@ -23,7 +25,6 @@ public class ClientDAO {
         this.clientValoration = clientValoration;
 
     }
-
 
 
     private String clientValoration;

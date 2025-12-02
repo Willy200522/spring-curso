@@ -11,13 +11,16 @@ public class mainClass {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
         ClientDAO client = context.getBean(ClientDAO.class);
+
         ClientVipDAO clientVip = context.getBean(ClientVipDAO.class);
 
-        clientVip.insertClient();
-        client.insertClient();
+        ClientDAO client1 = new ClientDAO();
 
-        client.setClientValoration("Alta");
-        client.getClientValoration();
+        client.insertClient(client);
+
+        clientVip.insertClient(5);
+
+        clientVip.insertClientVIP(client1);
 
         context.close();
 

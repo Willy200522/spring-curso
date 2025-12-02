@@ -76,4 +76,7 @@ public class LoginClass {
 @Component
 public class LoginClass {
 
+    @Pointcut("execution(public * com.william.aop.dao.*.*(..))")
+    public void forClients(){}
+
 }
