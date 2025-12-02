@@ -16,6 +16,9 @@ public class mainClass {
         clientVip.insertClient();
         client.insertClient();
 
+        client.setClientValoration("Alta");
+        client.getClientValoration();
+
         context.close();
 
     }
