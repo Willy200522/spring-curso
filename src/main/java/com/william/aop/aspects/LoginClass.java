@@ -1,12 +1,15 @@
 package com.william.aop.aspects;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import com.william.aop.model.Client;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 
-// 1era clase de aspectos
+
+// ======== 1era clase de aspectos ========
+
 /*
 @Aspect
 @Component
@@ -70,13 +73,53 @@ public class LoginClass {
  Fin de la primera clase
 */
 
-// 2da clase de aspectos: Ordenamiento de aspectos
+// ======== 2da clase de aspectos: Ordenamiento de aspectos ========
 
 @Aspect
 @Component
 public class LoginClass {
 
-    @Pointcut("execution(public * com.william.aop.dao.*.*(..))")
-    public void forClients(){}
+    //No puedo ejecutar una tarea después de un method sobre escrito por ejm toString
+    //Ya que esos méthods no son reconocidos como beans(components)
 
+    //===========================================================================
+    //=========================AFTER RETURNING===============
+    // -> Se pasa como parámetro el path del method a inyectar
+    // (lleva dos puntas para decir que puede recibir cualquier parámetro) la acción que se hará después
+    // -> Como segundo parámetro se pasa el nombre del objeto que utilizaré en mi aspecto
+    // es decir copia el objeto que retorna el DAO de cliente (en este caso lo llamamos como el parámetro de este poincut)
+
+    @AfterReturning(pointcut = "execution(* com.william.aop.dao.ClientDAO.searchClient(..))", returning = "clientList")
+    public void taskAfterFoundClient(List<Client> clientList){
+
+        System.out.println("(método aspect) " + clientList.get(0).getName() + " -> cliente recuperado");
+
+    }
+
+    //=========================AFTER THROWING===============
+    // Dos parámetros,
+    // - El poincut(dirección del méthod a ejecutar el at)
+    // - Un nombre identificativo, este se lo pasamos al method que ejecuta estas tareas de forma automática
+
+    @AfterThrowing(pointcut = "execution(* com.william.aop.dao.ClientDAO.searchClient(..))", throwing = "myThrow")
+    public void executeAfterThrow(Throwable myThrow){
+
+        System.out.println("\"(método aspect) \" .... enviando msg al responsable de solucionar los bugs");
+
+    }
+
+    //=========================AFTER===============
+    // Ejecuta una tarea, así no haya excepción
+    // Dos parámetros,
+    // - El poincut(dirección del méthod a ejecutar el at)
+    // - Un nombre identificativo, este se lo pasamos al method que ejecuta estas tareas de forma automática
+
+    @After("execution(* com.william.aop.dao.ClientDAO.searchClient(..))")
+    public void executeAfter(JoinPoint myJoin){
+
+        System.out.println("(método aspect) " + myJoin);
+
+        System.out.println("\"(método aspect) \".... always execute it");
+
+    }
 }

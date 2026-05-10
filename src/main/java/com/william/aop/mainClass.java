@@ -1,7 +1,6 @@
 package com.william.aop;
 
 import com.william.aop.dao.ClientDAO;
-import com.william.aop.dao.ClientVipDAO;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class mainClass {
@@ -10,17 +9,23 @@ public class mainClass {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-        ClientDAO client = context.getBean(ClientDAO.class);
+        ClientDAO clientBean = context.getBean(ClientDAO.class);
 
-        ClientVipDAO clientVip = context.getBean(ClientVipDAO.class);
+        boolean myParam= false;
 
-        ClientDAO client1 = new ClientDAO();
+        try {
 
-        client.insertClient(client);
+            System.out.println("(método main) Ejecutando method antes de la execp");
 
-        clientVip.insertClient(5);
+            System.out.println(clientBean.searchClient(myParam));
 
-        clientVip.insertClientVIP(client1);
+        } catch (Exception e) {
+
+            System.out.println("Error catched in searchClient");
+
+        }
+
+        System.out.println("(método main) Continuación de la ejecución del programa");
 
         context.close();
 

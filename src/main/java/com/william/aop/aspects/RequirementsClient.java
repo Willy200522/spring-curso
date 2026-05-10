@@ -4,7 +4,6 @@ import com.william.aop.dao.ClientDAO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.weaver.ast.Instanceof;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,8 @@ import org.springframework.stereotype.Component;
 public class RequirementsClient {
 
     @Before("com.william.aop.aspects.LoginClass.forClients()")
-    //Normal public void requirements(){
+    // Normal -> public void requirements(){
+    // El JoinPoint guarda
     public void requirements(JoinPoint myJoin){
 
         System.out.println("3 -- El cliente cumple los requisitos para la inserción");
