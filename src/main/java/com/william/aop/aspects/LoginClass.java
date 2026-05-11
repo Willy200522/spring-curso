@@ -2,6 +2,7 @@ package com.william.aop.aspects;
 
 import com.william.aop.model.Client;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -121,5 +122,42 @@ public class LoginClass {
 
         System.out.println("\"(método aspect) \".... always execute it");
 
+    }
+
+    // =============@Around=========
+    // Tenemos que usar el Pointcut expression pertinente (el method execution(con su path a donde apunta))
+    // Este pointcut que definimos es la forma dura, explicado arriba
+
+//    @Around("execution(* com.william.aop.services.*.getService(..))")
+//    public Object executeService(ProceedingJoinPoint myJoin)throws Throwable{
+//
+//        System.out.println("(méthod aspect) " + myJoin);
+//
+//        System.out.println("\"(méthod aspect) \".... before execute it");
+//
+//        Object obj = myJoin.proceed();
+//
+//        System.out.println("\"(méthod aspect) \".... after execute it");
+//
+//        return obj;
+//    }
+
+    // ejemplo para calcular con el tiempo del sistema
+    @Around("execution(public * com.william.aop.services.*.*(..))")
+    public Object executeAllServices(ProceedingJoinPoint myJoin)throws Throwable{
+
+        System.out.println("(método aspect) " + myJoin);
+
+        System.out.println("\"(método aspect) \".... before execute it");
+        long timestart = System.currentTimeMillis();
+
+        Object obj = myJoin.proceed();
+
+        long timeend = System.currentTimeMillis();
+
+
+        System.out.println("\"(método aspect) \".... after execute it, time: " + (timeend-timestart)/1000);
+
+        return obj;
     }
 }

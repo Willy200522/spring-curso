@@ -1,6 +1,6 @@
 package com.william.aop;
 
-import com.william.aop.dao.ClientDAO;
+import com.william.aop.services.MeasurementService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class mainClass {
@@ -9,23 +9,13 @@ public class mainClass {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
 
-        ClientDAO clientBean = context.getBean(ClientDAO.class);
+        MeasurementService service = context.getBean("measurementService", MeasurementService.class);
 
-        boolean myParam= false;
+        System.out.println("Main: call services method");
 
-        try {
-
-            System.out.println("(método main) Ejecutando method antes de la execp");
-
-            System.out.println(clientBean.searchClient(myParam));
-
-        } catch (Exception e) {
-
-            System.out.println("Error catched in searchClient");
-
-        }
-
-        System.out.println("(método main) Continuación de la ejecución del programa");
+        System.out.println("Main: return data: " + service.getService());
+        System.out.println("Main: return data six seconds: " + service.getServiceSixSeconds());
+        System.out.println("Main: return data seven seconds: " + service.getServiceSevenSeconds());
 
         context.close();
 
