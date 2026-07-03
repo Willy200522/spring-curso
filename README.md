@@ -38,3 +38,7 @@ pero esto haría un acoplamiento fuerte. Otra forma sería usar esta clase para 
     }
 
 ````
+
+## 3.- Add dependencies for security:
+
+He agregado las dependencias que usa spring security y además establecido como propiedades la versiones de estas que se usarán, se pueden establecer como variables estas versiones para tener todo compatible al compilar maven.
