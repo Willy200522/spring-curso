@@ -10,8 +10,8 @@
     <packaging>war</packaging>
 
     <properties>
-        <maven.compiler.source>25</maven.compiler.source>
-        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <springframework.version>7.1.0</springframework.version>
         <springsecurity.version>7.1.0</springsecurity.version>
