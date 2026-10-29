@@ -100,6 +100,9 @@ public class Clients {
     private String telefono;
 
     // -> Se mapea el atributo cliente en OrderClient para indicar relación entre ambas tablas
-    @OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToMany(
+            //fetch = FetchType.EAGER,
+            mappedBy = "client",
+            cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH})
     private List<OrderClient> order;
 }

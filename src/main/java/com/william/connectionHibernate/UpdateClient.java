@@ -3,7 +3,6 @@ package com.william.connectionHibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
 public class UpdateClient {
 
@@ -41,6 +40,8 @@ public class UpdateClient {
                     .setParameter("newName", name)
                     .setParameter("id", idClient)
                     .executeUpdate();
+
+            //com.william.connectionHibernate.Clients updatedClient = session.getS;
 
             session.getTransaction().commit();
 

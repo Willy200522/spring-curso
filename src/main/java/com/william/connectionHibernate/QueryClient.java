@@ -4,8 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.List;
-
 public class QueryClient {
 
     public static void main(String[] args) {
@@ -13,40 +11,27 @@ public class QueryClient {
         //Inicializar la session de hibernate
         SessionFactory factory = new Configuration().
                 configure("hibernate.cfg.xml").
-                addAnnotatedClass(Clients.class).
+                addAnnotatedClass(com.william.connectionHibernate.Clients.class).
+                addAnnotatedClass(com.william.connectionHibernate.OrderClient.class).
                 buildSessionFactory();
 
         Session session = factory.openSession();
 
         try {
 
-            session.beginTransaction(); // Comenzar la session
+            session.beginTransaction();
 
-            //Consultar los clientes
+            com.william.connectionHibernate.Clients clients = session.get(Clients.class, 1);
 
-            List<Clients> clients = session.createQuery("from Clients", Clients.class).getResultList();
-
-            for (Clients clients1: clients) {
-                System.out.println(clients1);
-            }
-
-            //todos los torvast
-
-            List<Clients> clients2=session.createQuery("from Clients as cl where cl.nombre like '%Torvast'", Clients.class).getResultList();
-
-            System.out.println("Clientes con apellido Torvast");
-
-            for (Clients torvast: clients2) {
-
-                System.out.println(torvast);
-
-            }
-
-            session.getTransaction().commit();
+            //session.getTransaction().commit();
 
             session.close();
 
+            System.out.println("Pedidos: " + clients.getOrder());
+
+
         } finally {
+
             factory.close();
         }
     }

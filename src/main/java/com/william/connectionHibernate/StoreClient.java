@@ -16,7 +16,7 @@ public class StoreClient {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration().
-                configure("hibernate.cfg.xml").
+                configure().
                 addAnnotatedClass(Clients.class).
                 buildSessionFactory();
 
@@ -24,7 +24,7 @@ public class StoreClient {
 
         try{
 
-            Clients client = new Clients("Linus Torvast", "vorkovn@hotmail.com","9523144");
+            Clients client = new Clients("Bill gates", "pacehco@hotmail.com","9523144");
 
             session.beginTransaction();
 
